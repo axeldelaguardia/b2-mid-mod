@@ -23,6 +23,7 @@ RSpec.describe 'employees show page', type: :feature do
 		EmployeeTicket.create!(employee: employee_1, ticket: ticket_2)
 		EmployeeTicket.create!(employee: employee_1, ticket: ticket_3)
 		EmployeeTicket.create!(employee: employee_1, ticket: ticket_4)
+		EmployeeTicket.create!(employee: employee_1, ticket: ticket_7)
 
 		EmployeeTicket.create!(employee: employee_2, ticket: ticket_5)
 		EmployeeTicket.create!(employee: employee_2, ticket: ticket_6)
@@ -87,6 +88,17 @@ RSpec.describe 'employees show page', type: :feature do
 
 			expect(current_path).to eq("/employees/#{employee_1.id}")
 			expect(page).to have_content(ticket_6.subject)
+		end
+	end
+
+	describe 'best friends' do
+		it 'unique list of tickets that are shared with other employees' do
+			visit "/employees/#{employee_1.id}"
+			save_and_open_page
+			within 'fieldset#best_friends' do
+				expect(page).to_not have_content(employee_2.name)
+				expect(page).to have_content(employee_3.name)
+			end
 		end
 	end
 end

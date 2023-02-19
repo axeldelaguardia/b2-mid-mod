@@ -7,6 +7,13 @@
 <% end %>
 </br></br>
 
+<fieldset id="best_friends" style="display: inline-block">
+	<legend>Shared Tickets With:</legend>
+	<% @best_friends.each do |bff| %>
+		<p><%= bff.name %></p>
+	<% end %>
+</fieldset>
+
 <fieldset id="oldest_ticket" style="display: inline-block">
 	<legend>Oldest Ticket</legend>
 	<p>Subject: <%= @tickets.first.subject %></p>
