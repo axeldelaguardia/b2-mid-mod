@@ -23,7 +23,7 @@
 
 <h4>Tickets</h4>
 <div id="tickets">
-	<% @tickets.drop(1).each do |ticket| %>
+	<% @tickets.each do |ticket| %>
 		<ul>
 			<hr>
 			<li id="<%= ticket.id %>">
