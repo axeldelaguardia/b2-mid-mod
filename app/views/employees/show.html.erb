@@ -1,0 +1,28 @@
+<h1><%= @employee.name %></h1>
+<h3>Department: <%= @employee.department.name %></h3>
+
+<%= form_with url: "/employee_tickets/#{@employee.id}", method: :post, local: true do |f| %>
+	<%= f.collection_select :ticket_id, @other_tickets, :id, :id %>
+	<%= f.submit 'Add Ticket' %>
+<% end %>
+</br></br>
+
+<fieldset id="oldest_ticket" style="display: inline-block">
+	<legend>Oldest Ticket</legend>
+	<p>Subject: <%= @tickets.first.subject %></p>
+	<p>Age: <%= @tickets.first.age %></p>
+</fieldset>
+
+
+<h4>Tickets</h4>
+<div id="tickets">
+	<% @tickets.drop(1).each do |ticket| %>
+		<ul>
+			<hr>
+			<li id="<%= ticket.id %>">
+				<p>Subject: <%= ticket.subject %></p>
+				<p>Age: <%= ticket.age %></p>
+			</li>
+		</ul>
+	<% end %>
+</div>
